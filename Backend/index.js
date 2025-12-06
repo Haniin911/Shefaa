@@ -1,16 +1,14 @@
 require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
+import express from "express";
+import cors from "cors";
+import connectDB from "./config/db";  
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log("Connected to MongoDB"))
-.catch((err) => console.error("MongoDB error:", err));
+connectDB();   
 
 // Test Route
 app.get("/", (req, res) => {
